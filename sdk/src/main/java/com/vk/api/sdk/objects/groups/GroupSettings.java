@@ -119,6 +119,9 @@ public class GroupSettings {
     @SerializedName("website")
     private String website;
 
+    @SerializedName("events")
+    private Integer events;
+
     public String getTitle() {
         return title;
     }
@@ -195,43 +198,48 @@ public class GroupSettings {
         return website;
     }
 
+    public Integer getEvents() {
+        return events;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(subjectList, website, address, access, obsceneStopwords, topics, subject, wiki, description, obsceneFilter, video, title, photos, obsceneWords, rss, docs, place, audio, wall);
+        return Objects.hash(title, description, address, place, wall, photos, video, audio, docs, topics, wiki, obsceneFilter, obsceneStopwords, obsceneWords, access, subject, subjectList, rss, website, events);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GroupSettings groupSettings = (GroupSettings) o;
-        return Objects.equals(title, groupSettings.title) &&
-                Objects.equals(description, groupSettings.description) &&
-                Objects.equals(address, groupSettings.address) &&
-                Objects.equals(place, groupSettings.place) &&
-                Objects.equals(wall, groupSettings.wall) &&
-                Objects.equals(photos, groupSettings.photos) &&
-                Objects.equals(video, groupSettings.video) &&
-                Objects.equals(audio, groupSettings.audio) &&
-                Objects.equals(docs, groupSettings.docs) &&
-                Objects.equals(topics, groupSettings.topics) &&
-                Objects.equals(wiki, groupSettings.wiki) &&
-                Objects.equals(obsceneFilter, groupSettings.obsceneFilter) &&
-                Objects.equals(obsceneStopwords, groupSettings.obsceneStopwords) &&
-                Objects.equals(obsceneWords, groupSettings.obsceneWords) &&
-                Objects.equals(access, groupSettings.access) &&
-                Objects.equals(subject, groupSettings.subject) &&
-                Objects.equals(subjectList, groupSettings.subjectList) &&
-                Objects.equals(rss, groupSettings.rss) &&
-                Objects.equals(website, groupSettings.website);
+        GroupSettings that = (GroupSettings) o;
+        return Objects.equals(title, that.title) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(place, that.place) &&
+                Objects.equals(wall, that.wall) &&
+                Objects.equals(photos, that.photos) &&
+                Objects.equals(video, that.video) &&
+                Objects.equals(audio, that.audio) &&
+                Objects.equals(docs, that.docs) &&
+                Objects.equals(topics, that.topics) &&
+                Objects.equals(wiki, that.wiki) &&
+                obsceneFilter == that.obsceneFilter &&
+                obsceneStopwords == that.obsceneStopwords &&
+                Objects.equals(obsceneWords, that.obsceneWords) &&
+                Objects.equals(access, that.access) &&
+                Objects.equals(subject, that.subject) &&
+                Objects.equals(subjectList, that.subjectList) &&
+                Objects.equals(rss, that.rss) &&
+                Objects.equals(website, that.website) &&
+                Objects.equals(events, that.events);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("GroupSettings{");
-        sb.append("title='").append(title).append("'");
-        sb.append(", description='").append(description).append("'");
-        sb.append(", address='").append(address).append("'");
+        sb.append("title='").append(title).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", address='").append(address).append('\'');
         sb.append(", place=").append(place);
         sb.append(", wall=").append(wall);
         sb.append(", photos=").append(photos);
@@ -242,12 +250,13 @@ public class GroupSettings {
         sb.append(", wiki=").append(wiki);
         sb.append(", obsceneFilter=").append(obsceneFilter);
         sb.append(", obsceneStopwords=").append(obsceneStopwords);
-        sb.append(", obsceneWords='").append(obsceneWords).append("'");
+        sb.append(", obsceneWords='").append(obsceneWords).append('\'');
         sb.append(", access=").append(access);
         sb.append(", subject=").append(subject);
         sb.append(", subjectList=").append(subjectList);
-        sb.append(", rss='").append(rss).append("'");
-        sb.append(", website='").append(website).append("'");
+        sb.append(", rss='").append(rss).append('\'');
+        sb.append(", website='").append(website).append('\'');
+        sb.append(", events=").append(events);
         sb.append('}');
         return sb.toString();
     }

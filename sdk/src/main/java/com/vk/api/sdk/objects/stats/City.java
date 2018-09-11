@@ -5,28 +5,34 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
 /**
- * Age object
+ * City object
  */
 public class City {
 
-    @SerializedName("visitors")
-    private Integer visitors;
+    /**
+     * Number of visitors
+     */
+    @SerializedName("count")
+    private Integer count;
 
     /**
-     * City ID
+     * City identifier
      */
-    @SerializedName("value")
-    private String value;
+    @SerializedName("city_id")
+    private String cityId;
 
+    /**
+     * City name
+     */
     @SerializedName("name")
     private String name;
 
-    public Integer getVisitors() {
-        return visitors;
+    public Integer getCount() {
+        return count;
     }
 
-    public String getValue() {
-        return value;
+    public String getCityId() {
+        return cityId;
     }
 
     public String getName() {
@@ -38,21 +44,21 @@ public class City {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return Objects.equals(visitors, city.visitors) &&
-                Objects.equals(value, city.value) &&
+        return Objects.equals(count, city.count) &&
+                Objects.equals(cityId, city.cityId) &&
                 Objects.equals(name, city.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(visitors, value, name);
+        return Objects.hash(count, cityId, name);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("City{");
-        sb.append("visitors=").append(visitors);
-        sb.append(", value='").append(value).append('\'');
+        sb.append("count=").append(count);
+        sb.append(", cityId='").append(cityId).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append('}');
         return sb.toString();

@@ -11,15 +11,15 @@ import java.util.List;
 /**
  * Query for Messages.markAsAnsweredDialog method
  */
-public class MessagesMarkAsAnsweredDialogQuery extends AbstractQueryBuilder<MessagesMarkAsAnsweredDialogQuery, OkResponse> {
+public class MessagesMarkAsAnsweredConversationQuery extends AbstractQueryBuilder<MessagesMarkAsAnsweredConversationQuery, OkResponse> {
     /**
      * Creates a AbstractQueryBuilder instance that can be used to build api request with various parameters
      *
      * @param client VK API client
      * @param actor  actor with access token
      */
-    public MessagesMarkAsAnsweredDialogQuery(VkApiClient client, GroupActor actor, Integer peerId) {
-        super(client, "messages.markAsAnsweredDialog", OkResponse.class);
+    public MessagesMarkAsAnsweredConversationQuery(VkApiClient client, GroupActor actor, Integer peerId) {
+        super(client, "messages.markAsAnsweredConversation", OkResponse.class);
         accessToken(actor.getAccessToken());
         peerId(peerId);
     }
@@ -30,7 +30,7 @@ public class MessagesMarkAsAnsweredDialogQuery extends AbstractQueryBuilder<Mess
      * @param value value of "peer_id" parameter.
      * @return a reference to this {@code AbstractQueryBuilder} object to fulfill the "Builder" pattern.
      */
-    private MessagesMarkAsAnsweredDialogQuery peerId(Integer value) {
+    private MessagesMarkAsAnsweredConversationQuery peerId(Integer value) {
         return unsafeParam("peer_id", value);
     }
 
@@ -41,12 +41,22 @@ public class MessagesMarkAsAnsweredDialogQuery extends AbstractQueryBuilder<Mess
      * @param value value of "answered" parameter.
      * @return a reference to this {@code AbstractQueryBuilder} object to fulfill the "Builder" pattern.
      */
-    public MessagesMarkAsAnsweredDialogQuery answered(Boolean value) {
+    public MessagesMarkAsAnsweredConversationQuery answered(Boolean value) {
         return unsafeParam("answered", value);
     }
 
+    /**
+     * Group id (for messages with the user actor)
+     *
+     * @param value value of "peer_id" parameter.
+     * @return a reference to this {@code AbstractQueryBuilder} object to fulfill the "Builder" pattern.
+     */
+    private MessagesMarkAsAnsweredConversationQuery groupId(Integer value) {
+        return unsafeParam("group_id", value);
+    }
+
     @Override
-    protected MessagesMarkAsAnsweredDialogQuery getThis() {
+    protected MessagesMarkAsAnsweredConversationQuery getThis() {
         return this;
     }
 

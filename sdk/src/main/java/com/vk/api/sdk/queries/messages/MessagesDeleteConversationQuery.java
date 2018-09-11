@@ -12,15 +12,15 @@ import java.util.List;
 /**
  * Query for Messages.deleteDialog method
  */
-public class MessagesDeleteDialogQuery extends AbstractQueryBuilder<MessagesDeleteDialogQuery, OkResponse> {
+public class MessagesDeleteConversationQuery extends AbstractQueryBuilder<MessagesDeleteConversationQuery, OkResponse> {
     /**
      * Creates a AbstractQueryBuilder instance that can be used to build api request with various parameters
      *
      * @param client VK API client
      * @param actor  actor with access token
      */
-    public MessagesDeleteDialogQuery(VkApiClient client, UserActor actor) {
-        super(client, "messages.deleteDialog", OkResponse.class);
+    public MessagesDeleteConversationQuery(VkApiClient client, UserActor actor) {
+        super(client, "messages.deleteConversation", OkResponse.class);
         accessToken(actor.getAccessToken());
     }
 
@@ -30,8 +30,8 @@ public class MessagesDeleteDialogQuery extends AbstractQueryBuilder<MessagesDele
      * @param client VK API client
      * @param actor  actor with access token
      */
-    public MessagesDeleteDialogQuery(VkApiClient client, GroupActor actor) {
-        super(client, "messages.deleteDialog", OkResponse.class);
+    public MessagesDeleteConversationQuery(VkApiClient client, GroupActor actor) {
+        super(client, "messages.deleteConversation", OkResponse.class);
         accessToken(actor.getAccessToken());
     }
 
@@ -41,7 +41,7 @@ public class MessagesDeleteDialogQuery extends AbstractQueryBuilder<MessagesDele
      * @param value value of "user id" parameter.
      * @return a reference to this {@code AbstractQueryBuilder} object to fulfill the "Builder" pattern.
      */
-    public MessagesDeleteDialogQuery userId(String value) {
+    public MessagesDeleteConversationQuery userId(String value) {
         return unsafeParam("user_id", value);
     }
 
@@ -51,7 +51,7 @@ public class MessagesDeleteDialogQuery extends AbstractQueryBuilder<MessagesDele
      * @param value value of "peer id" parameter.
      * @return a reference to this {@code AbstractQueryBuilder} object to fulfill the "Builder" pattern.
      */
-    public MessagesDeleteDialogQuery peerId(Integer value) {
+    public MessagesDeleteConversationQuery peerId(Integer value) {
         return unsafeParam("peer_id", value);
     }
 
@@ -61,7 +61,7 @@ public class MessagesDeleteDialogQuery extends AbstractQueryBuilder<MessagesDele
      * @param value value of "offset" parameter. Minimum is 0.
      * @return a reference to this {@code AbstractQueryBuilder} object to fulfill the "Builder" pattern.
      */
-    public MessagesDeleteDialogQuery offset(Integer value) {
+    public MessagesDeleteConversationQuery offset(Integer value) {
         return unsafeParam("offset", value);
     }
 
@@ -72,12 +72,22 @@ public class MessagesDeleteDialogQuery extends AbstractQueryBuilder<MessagesDele
      * @param value value of "count" parameter. Maximum is 10000. Minimum is 0.
      * @return a reference to this {@code AbstractQueryBuilder} object to fulfill the "Builder" pattern.
      */
-    public MessagesDeleteDialogQuery count(Integer value) {
+    public MessagesDeleteConversationQuery count(Integer value) {
         return unsafeParam("count", value);
     }
 
+    /**
+     * Group id (for messages with the user actor)
+     *
+     * @param value value of "group_id" parameter.
+     * @return a reference to this {@code AbstractQueryBuilder} object to fulfill the "Builder" pattern.
+     */
+    private MessagesDeleteConversationQuery groupId(Integer value) {
+        return unsafeParam("group_id", value);
+    }
+
     @Override
-    protected MessagesDeleteDialogQuery getThis() {
+    protected MessagesDeleteConversationQuery getThis() {
         return this;
     }
 

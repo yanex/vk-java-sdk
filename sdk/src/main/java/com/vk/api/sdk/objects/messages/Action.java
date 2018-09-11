@@ -2,45 +2,86 @@ package com.vk.api.sdk.objects.messages;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Message action type
- */
-public enum Action {
+import java.util.Objects;
 
-    @SerializedName("chat_photo_update")
-    CHAT_PHOTO_UPDATE("chat_photo_update"),
+public class Action {
 
-    @SerializedName("chat_photo_remove")
-    CHAT_PHOTO_REMOVE("chat_photo_remove"),
+    /**
+     * Action type
+     */
+    @SerializedName("type")
+    private ActionType actionType;
 
-    @SerializedName("chat_create")
-    CHAT_CREATE("chat_create"),
+    /**
+     * Target member user identifier
+     */
+    @SerializedName("member_id")
+    private Integer memberId;
 
-    @SerializedName("chat_title_update")
-    CHAT_TITLE_UPDATE("chat_title_update"),
+    /**
+     * Conversation title
+     */
+    @SerializedName("text")
+    private String text;
 
-    @SerializedName("chat_invite_user")
-    CHAT_INVITE_USER("chat_invite_user"),
+    /**
+     * Invited/kicked email address
+     */
+    @SerializedName("email")
+    private String email;
 
-    @SerializedName("chat_kick_user")
-    CHAT_KICK_USER("chat_kick_user"),
+    /**
+     * Conversation picture
+     */
+    @SerializedName("photo")
+    private ChatPhoto photo;
 
-    @SerializedName("chat_pin_message")
-    CHAT_PIN_MESSAGE("chat_pin_message"),
-
-    @SerializedName("chat_unpin_message")
-    CHAT_UNPIN_MESSAGE("chat_unpin_message"),
-
-    @SerializedName("chat_invite_user_by_link")
-    CHAT_INVITE_USER_BY_LINK("chat_invite_user_by_link");
-
-    private final String value;
-
-    Action(String value) {
-        this.value = value;
+    public ActionType getActionType() {
+        return actionType;
     }
 
-    public String getValue() {
-        return value;
+    public Integer getMemberId() {
+        return memberId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public ChatPhoto getPhoto() {
+        return photo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Action action = (Action) o;
+        return actionType == action.actionType &&
+                Objects.equals(memberId, action.memberId) &&
+                Objects.equals(text, action.text) &&
+                Objects.equals(email, action.email) &&
+                Objects.equals(photo, action.photo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(actionType, memberId, text, email, photo);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Action{");
+        sb.append("actionType=").append(actionType);
+        sb.append(", memberId=").append(memberId);
+        sb.append(", text='").append(text).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", photo=").append(photo);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -4,46 +4,7 @@ import com.vk.api.sdk.client.AbstractAction;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.queries.messages.MessagesAddChatUserQuery;
-import com.vk.api.sdk.queries.messages.MessagesAllowMessagesFromGroupQuery;
-import com.vk.api.sdk.queries.messages.MessagesCreateChatQuery;
-import com.vk.api.sdk.queries.messages.MessagesDeleteChatPhotoQuery;
-import com.vk.api.sdk.queries.messages.MessagesDeleteDialogQuery;
-import com.vk.api.sdk.queries.messages.MessagesDeleteQuery;
-import com.vk.api.sdk.queries.messages.MessagesDenyMessagesFromGroupQuery;
-import com.vk.api.sdk.queries.messages.MessagesEditChatQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetByIdQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetChatQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetChatQueryWithChatIds;
-import com.vk.api.sdk.queries.messages.MessagesGetChatQueryWithChatIdsFields;
-import com.vk.api.sdk.queries.messages.MessagesGetChatQueryWithFields;
-import com.vk.api.sdk.queries.messages.MessagesGetChatUsersQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetChatUsersQueryWithChatIds;
-import com.vk.api.sdk.queries.messages.MessagesGetChatUsersQueryWithChatIdsFields;
-import com.vk.api.sdk.queries.messages.MessagesGetChatUsersQueryWithFields;
-import com.vk.api.sdk.queries.messages.MessagesGetDialogsQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetHistoryAttachmentsQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetHistoryQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetLastActivityQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetLongPollHistoryQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetLongPollServerQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetQuery;
-import com.vk.api.sdk.queries.messages.MessagesIsMessagesFromGroupAllowedQuery;
-import com.vk.api.sdk.queries.messages.MessagesMarkAsAnsweredDialogQuery;
-import com.vk.api.sdk.queries.messages.MessagesMarkAsImportantDialogQuery;
-import com.vk.api.sdk.queries.messages.MessagesMarkAsImportantQuery;
-import com.vk.api.sdk.queries.messages.MessagesMarkAsReadQuery;
-import com.vk.api.sdk.queries.messages.MessagesRemoveChatUserQuery;
-import com.vk.api.sdk.queries.messages.MessagesRestoreQuery;
-import com.vk.api.sdk.queries.messages.MessagesSearchDialogsQuery;
-import com.vk.api.sdk.queries.messages.MessagesSearchQuery;
-import com.vk.api.sdk.queries.messages.MessagesSendQuery;
-import com.vk.api.sdk.queries.messages.MessagesSendWithUserIdsQuery;
-import com.vk.api.sdk.queries.messages.MessagesSetActivityQuery;
-import com.vk.api.sdk.queries.messages.MessagesSetChatPhotoQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetInviteLinkQuery;
-import com.vk.api.sdk.queries.messages.MessagesGetChatPreviewQuery;
-import com.vk.api.sdk.queries.messages.MessagesJoinChatByInviteLinkQuery;
+import com.vk.api.sdk.queries.messages.*;
 import com.vk.api.sdk.queries.users.UserField;
 
 import java.util.List;
@@ -79,6 +40,7 @@ public class Messages extends AbstractAction {
     /**
      * Returns a list of the current user's conversations.
      */
+    @Deprecated
     public MessagesGetDialogsQuery getDialogs(UserActor actor) {
         return new MessagesGetDialogsQuery(getClient(), actor);
     }
@@ -86,6 +48,7 @@ public class Messages extends AbstractAction {
     /**
      * Returns a list of the current user's conversations.
      */
+    @Deprecated
     public MessagesGetDialogsQuery getDialogs(GroupActor actor) {
         return new MessagesGetDialogsQuery(getClient(), actor);
     }
@@ -219,15 +182,15 @@ public class Messages extends AbstractAction {
     /**
      * Deletes all private messages in a conversation.
      */
-    public MessagesDeleteDialogQuery deleteDialog(UserActor actor) {
-        return new MessagesDeleteDialogQuery(getClient(), actor);
+    public MessagesDeleteConversationQuery deleteConversation(UserActor actor) {
+        return new MessagesDeleteConversationQuery(getClient(), actor);
     }
 
     /**
      * Deletes all private messages in a conversation.
      */
-    public MessagesDeleteDialogQuery deleteDialog(GroupActor actor) {
-        return new MessagesDeleteDialogQuery(getClient(), actor);
+    public MessagesDeleteConversationQuery deleteConversation(GroupActor actor) {
+        return new MessagesDeleteConversationQuery(getClient(), actor);
     }
 
     /**
@@ -266,17 +229,17 @@ public class Messages extends AbstractAction {
     }
 
     /**
-     * Marks and unmarks dialogs as important.
+     * Marks and unmarks conversation as important.
      */
-    public MessagesMarkAsImportantDialogQuery markAsImportantDialog(GroupActor actor, Integer peerId) {
-        return new MessagesMarkAsImportantDialogQuery(getClient(), actor, peerId);
+    public MessagesMarkAsImportantConversationQuery markAsImportantConversation(GroupActor actor, Integer peerId) {
+        return new MessagesMarkAsImportantConversationQuery(getClient(), actor, peerId);
     }
 
     /**
-     * Marks and unmarks dialogs as answered.
+     * Marks and unmarks conversation as answered.
      */
-    public MessagesMarkAsAnsweredDialogQuery markAsAnsweredDialog(GroupActor actor, Integer peerId) {
-        return new MessagesMarkAsAnsweredDialogQuery(getClient(), actor, peerId);
+    public MessagesMarkAsAnsweredConversationQuery markAsAnsweredConversation(GroupActor actor, Integer peerId) {
+        return new MessagesMarkAsAnsweredConversationQuery(getClient(), actor, peerId);
     }
 
     /**
@@ -387,6 +350,7 @@ public class Messages extends AbstractAction {
     /**
      * Returns a list of IDs of users participating in a chat.
      */
+    @Deprecated
     public MessagesGetChatUsersQuery getChatUsers(UserActor actor) {
         return new MessagesGetChatUsersQuery(getClient(), actor);
     }
@@ -394,6 +358,7 @@ public class Messages extends AbstractAction {
     /**
      * Returns a list of IDs of users participating in a chat.
      */
+    @Deprecated
     public MessagesGetChatUsersQueryWithFields getChatUsers(UserActor actor, UserField... fields) {
         return new MessagesGetChatUsersQueryWithFields(getClient(), actor, fields);
     }
@@ -401,6 +366,7 @@ public class Messages extends AbstractAction {
     /**
      * Returns a list of IDs of users participating in a chat.
      */
+    @Deprecated
     public MessagesGetChatUsersQueryWithFields getChatUsers(UserActor actor, List<UserField> fields) {
         return new MessagesGetChatUsersQueryWithFields(getClient(), actor, fields);
     }
@@ -408,6 +374,7 @@ public class Messages extends AbstractAction {
     /**
      * Returns a list of IDs of users participating in a chat.
      */
+    @Deprecated
     public MessagesGetChatUsersQueryWithChatIds getChatUsers(UserActor actor, Integer... chatIds) {
         return new MessagesGetChatUsersQueryWithChatIds(getClient(), actor, chatIds);
     }
@@ -415,6 +382,7 @@ public class Messages extends AbstractAction {
     /**
      * Returns a list of IDs of users participating in a chat.
      */
+    @Deprecated
     public MessagesGetChatUsersQueryWithChatIdsFields getChatUsers(UserActor actor, List<Integer> chatIds, UserField... fields) {
         return new MessagesGetChatUsersQueryWithChatIdsFields(getClient(), actor, chatIds, fields);
     }
@@ -422,6 +390,7 @@ public class Messages extends AbstractAction {
     /**
      * Returns a list of IDs of users participating in a chat.
      */
+    @Deprecated
     public MessagesGetChatUsersQueryWithChatIdsFields getChatUsers(UserActor actor, List<Integer> chatIds, List<UserField> fields) {
         return new MessagesGetChatUsersQueryWithChatIdsFields(getClient(), actor, chatIds, fields);
     }
@@ -502,4 +471,133 @@ public class Messages extends AbstractAction {
     public MessagesIsMessagesFromGroupAllowedQuery isMessagesFromGroupAllowed(GroupActor actor, int userId) {
         return new MessagesIsMessagesFromGroupAllowedQuery(getClient(), actor, userId);
     }
+
+    /**
+     * Returns the user conversation list.
+     */
+    public MessagesGetConversationsQuery getConversations(UserActor actor, UserField... userFields) {
+        return new MessagesGetConversationsQuery(getClient(), actor, userFields);
+    }
+
+    /**
+     * Returns the user conversation list.
+     */
+    public MessagesGetConversationsQuery getConversations(UserActor actor, List<UserField> fields) {
+        return new MessagesGetConversationsQuery(getClient(), actor, fields);
+    }
+
+    /**
+     * Returns the community conversation list.
+     */
+    public MessagesGetConversationsQuery getConversations(GroupActor actor, UserField... fields) {
+        return new MessagesGetConversationsQuery(getClient(), actor, fields);
+    }
+
+    /**
+     * Returns the community conversation list.
+     */
+    public MessagesGetConversationsQuery getConversations(GroupActor actor, List<UserField> fields) {
+        return new MessagesGetConversationsQuery(getClient(), actor, fields);
+    }
+
+    /**
+     * Returns the conversation data using its identifier.
+     */
+    public MessagesGetConversationsByIdQuery getConversationsByIdQuery(UserActor actor, List<Integer> peerIds, UserField... fields) {
+        return new MessagesGetConversationsByIdQuery(getClient(), actor, peerIds, fields);
+    }
+
+    /**
+     * Returns the conversation data using its identifier.
+     */
+    public MessagesGetConversationsByIdQuery getConversationsByIdQuery(UserActor actor, List<Integer> peerIds, List<UserField> fields) {
+        return new MessagesGetConversationsByIdQuery(getClient(), actor, peerIds, fields);
+    }
+
+    /**
+     * Returns the conversation data using its identifier.
+     */
+    public MessagesGetConversationsByIdQuery getConversationsByIdQuery(GroupActor actor, List<Integer> peerIds, UserField... fields) {
+        return new MessagesGetConversationsByIdQuery(getClient(), actor, peerIds, fields);
+    }
+
+    /**
+     * Returns the conversation data using its identifier.
+     */
+    public MessagesGetConversationsByIdQuery getConversationsByIdQuery(GroupActor actor, List<Integer> peerIds, List<UserField> fields) {
+        return new MessagesGetConversationsByIdQuery(getClient(), actor, peerIds, fields);
+    }
+
+    /**
+     * Returns the conversation participants.
+     */
+    public MessagesGetConversationMembersQuery getConversationMembers(UserActor actor, Integer peerId, UserField... fields) {
+        return new MessagesGetConversationMembersQuery(getClient(), actor, peerId, fields);
+    }
+
+    /**
+     * Returns the conversation participants.
+     */
+    public MessagesGetConversationMembersQuery getConversationMembers(UserActor actor, Integer peerId, List<UserField> fields) {
+        return new MessagesGetConversationMembersQuery(getClient(), actor, peerId, fields);
+    }
+
+    /**
+     * Returns the conversation participants.
+     */
+    public MessagesGetConversationMembersQuery getConversationMembers(GroupActor actor, Integer peerId, UserField... fields) {
+        return new MessagesGetConversationMembersQuery(getClient(), actor, peerId, fields);
+    }
+
+    /**
+     * Returns the conversation participants.
+     */
+    public MessagesGetConversationMembersQuery getConversationMembers(GroupActor actor, Integer peerId, List<UserField> fields) {
+        return new MessagesGetConversationMembersQuery(getClient(), actor, peerId, fields);
+    }
+
+    /**
+     * Searches in conversations, returns the search result.
+     */
+    public MessagesSearchConversationsQuery searchConversations(UserActor actor, String query, UserField... fields) {
+        return new MessagesSearchConversationsQuery(getClient(), actor, query, fields);
+    }
+
+    /**
+     * Searches in conversations, returns the search result.
+     */
+    public MessagesSearchConversationsQuery searchConversations(UserActor actor, String query, List<UserField> fields) {
+        return new MessagesSearchConversationsQuery(getClient(), actor, query, fields);
+    }
+
+    /**
+     * Searches in conversations, returns the search result.
+     */
+    public MessagesSearchConversationsQuery searchConversations(GroupActor actor, String query, UserField... fields) {
+        return new MessagesSearchConversationsQuery(getClient(), actor, query, fields);
+    }
+
+    /**
+     * Searches in conversations, returns the search result.
+     */
+    public MessagesSearchConversationsQuery searchConversations(GroupActor actor, String query, List<UserField> fields) {
+        return new MessagesSearchConversationsQuery(getClient(), actor, query, fields);
+    }
+
+    public MessagesGetByConversationMessageIdQuery getByConversationMessageId(UserActor actor, Integer peerId, UserField... fields) {
+        return new MessagesGetByConversationMessageIdQuery(getClient(), actor, peerId, fields);
+    }
+
+    public MessagesGetByConversationMessageIdQuery getByConversationMessageId(UserActor actor, Integer peerId, List<UserField> fields) {
+        return new MessagesGetByConversationMessageIdQuery(getClient(), actor, peerId, fields);
+    }
+
+    public MessagesGetByConversationMessageIdQuery getByConversationMessageId(GroupActor actor, Integer peerId, UserField... fields) {
+        return new MessagesGetByConversationMessageIdQuery(getClient(), actor, peerId, fields);
+    }
+
+    public MessagesGetByConversationMessageIdQuery getByConversationMessageId(GroupActor actor, Integer peerId, List<UserField> fields) {
+        return new MessagesGetByConversationMessageIdQuery(getClient(), actor, peerId, fields);
+    }
+
 }

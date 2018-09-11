@@ -53,6 +53,8 @@ public class ExceptionMapper {
                 return new ApiMethodDisabledException(error.getErrorMsg());
             case 24:
                 return new ApiNeedConfirmationException(error.getErrorMsg(), error.getConfirmationText());
+            case 29:
+                return new ApiRateLimitReachedException(error.getErrorMsg());
             case 1310:
                 return new ApiCommunitiesCatalogDisabledException(error.getErrorMsg());
             case 1311:
